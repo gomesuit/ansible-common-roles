@@ -13,46 +13,65 @@
   changed_when: false
   always_run: yes
 
+- stat: path=/usr/local/ruby/bin/ruby
+  register: is_installed_ruby
+
 #    - debug: var=isInstallRedis.stdout_lines
 
 - name: download install src
-  get_url: url=http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz dest={{ tmp_dir }}
+  get_url: url=http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz dest={{ tmp_dir }}/ruby-2.2.2.tar.gz
+  when: is_installed_ruby.stat.exists == False
 
 - name: unarchive src file
   unarchive: src={{ tmp_dir }}/ruby-2.2.2.tar.gz dest={{ tmp_dir }}
+  when: is_installed_ruby.stat.exists == False
 
 - name: configure ruby src
   command: chdir={{ ruby_src_dir }} ./configure --prefix={{ ruby_home }}
-  when: isInstallRuby|failed
+  when: is_installed_ruby.stat.exists == False
 
 - name: make ruby src
   command: chdir={{ ruby_src_dir }} make
-  when: isInstallRuby|failed
+  when: is_installed_ruby.stat.exists == False
 
 - name: make install ruby
   command: chdir={{ ruby_src_dir }} make install
-  when: isInstallRuby|failed
+  when: is_installed_ruby.stat.exists == False
 
 - name: export path
   lineinfile: dest=/root/.bash_profile line='export PATH={{ ruby_home }}/bin:$PATH'
 
+- stat: path=/usr/local/ruby/lib/ruby/site_ruby/2.2.0/x86_64-linux/openssl.so
+  register: is_installed_openssl
+
 - name: create openssl Makefile
   command: chdir={{ ruby_src_dir }}/ext/openssl {{ ruby_home }}/bin/ruby extconf.rb
+  when: is_installed_openssl.stat.exists == False
 
 - name: debug to openssl Makefile
   command: chdir={{ ruby_src_dir }}/ext/openssl sed -i -e "1i top_srcdir = {{ ruby_src_dir }}" Makefile
+  when: is_installed_openssl.stat.exists == False
 
 - name: make ruby openssl
   command: chdir={{ ruby_src_dir }}/ext/openssl make
+  when: is_installed_openssl.stat.exists == False
 
 - name: make install ruby openssl 
   command: chdir={{ ruby_src_dir }}/ext/openssl make install
+  when: is_installed_openssl.stat.exists == False
+
+- stat: path=/usr/local/ruby/lib/ruby/site_ruby/2.2.0/x86_64-linux/zlib.so
+  register: is_installed_zlib
 
 - name: create zlib Makefile
   command: chdir={{ ruby_src_dir }}/ext/zlib {{ ruby_home }}/bin/ruby extconf.rb
+  when: is_installed_zlib.stat.exists == False
 
 - name: make ruby zlib
   command: chdir={{ ruby_src_dir }}/ext/zlib make
+  when: is_installed_zlib.stat.exists == False
 
 - name: make install ruby zlib
   command: chdir={{ ruby_src_dir }}/ext/zlib make install
+  when: is_installed_zlib.stat.exists == False
+

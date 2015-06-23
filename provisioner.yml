@@ -7,10 +7,6 @@
     - ruby
     - bundler
     - docker
-#  tasks:
-#  	- name: git clone serverspec file
-#      git: repo=https://github.com/gomesuit/serverspecFile.git
-#           dest=/home/vagrant/serverspecFile
-#  tasks:
-#	- name: be sure test-kitchen is installed
-#	  gem: executable=/usr/local/ruby/bin/gem name=test-kitchen user_install=False
+  tasks:
+    - name: bundle install for provisioner
+      command: chdir=/home/vagrant/provisioner /usr/local/ruby/bin/bundle
