@@ -3,7 +3,7 @@
   sudo: yes
   roles:
     - common
-#    - serverspec
+    - serverspec
     - ruby
     - bundler
     - docker
