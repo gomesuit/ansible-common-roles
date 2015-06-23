@@ -1,0 +1,58 @@
+---
+- name: install yum packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - libffi-devel
+    - zlib-devel
+    - openssl-devel
+
+- name: check ruby install
+  command: /usr/local/ruby/bin/ruby --version
+  ignore_errors: True
+  register: isInstallRuby
+  changed_when: false
+  always_run: yes
+
+#    - debug: var=isInstallRedis.stdout_lines
+
+- name: download install src
+  get_url: url=http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p547.tar.gz dest={{ tmp_dir }}
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/ruby-1.9.3-p547.tar.gz dest={{ tmp_dir }}
+
+- name: configure ruby src
+  command: chdir={{ ruby_src_dir }} ./configure --prefix={{ ruby_home }}
+  when: isInstallRuby|failed
+
+- name: make ruby src
+  command: chdir={{ ruby_src_dir }} make
+  when: isInstallRuby|failed
+
+- name: make install ruby
+  command: chdir={{ ruby_src_dir }} make install
+  when: isInstallRuby|failed
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export PATH={{ ruby_home }}/bin:$PATH'
+
+- name: create openssl Makefile
+  command: chdir={{ ruby_src_dir }}/ext/openssl {{ ruby_home }}/bin/ruby extconf.rb
+
+- name: debug to openssl Makefile
+  command: chdir={{ ruby_src_dir }}/ext/openssl sed -i -e "1i top_srcdir = {{ ruby_src_dir }}" Makefile
+
+- name: make ruby openssl
+  command: chdir={{ ruby_src_dir }}/ext/openssl make
+
+- name: make install ruby openssl 
+  command: chdir={{ ruby_src_dir }}/ext/openssl make install
+
+- name: create zlib Makefile
+  command: chdir={{ ruby_src_dir }}/ext/zlib {{ ruby_home }}/bin/ruby extconf.rb
+
+- name: make ruby zlib
+  command: chdir={{ ruby_src_dir }}/ext/zlib make
+
+- name: make install ruby zlib
+  command: chdir={{ ruby_src_dir }}/ext/zlib make install

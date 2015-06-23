@@ -1,0 +1,5 @@
+---
+redis_dir: /root/redis
+redis_port: 7000
+tmp_dir: /tmp
+redis_src_dir: "{{ tmp_dir }}/tmp/redis-3.0.1"

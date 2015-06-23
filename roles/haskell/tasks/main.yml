@@ -1,0 +1,64 @@
+---
+- name: install yum packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - gmp-devel
+    - zlib-devel
+    - freeglut
+    - freeglut-devel
+
+- name: download ghc install src
+  get_url: url=https://www.haskell.org/ghc/dist/7.8.4/ghc-7.8.4-x86_64-unknown-linux-centos65.tar.xz dest={{ tmp_dir }}
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/ghc-7.8.4-x86_64-unknown-linux-centos65.tar.xz dest={{ tmp_dir }}
+
+- name: configure ghc src
+  command: chdir={{ ghc_src_dir }} ./configure --prefix={{ ghc_home }}
+
+- name: install ghc
+  command: chdir={{ ghc_src_dir }} make install
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export PATH={{ ghc_home }}/bin:$PATH'
+
+- name: download cabal install src
+  get_url: url=https://www.haskell.org/cabal/release/cabal-install-1.22.4.0/cabal-install-1.22.4.0.tar.gz dest={{ tmp_dir }}
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/cabal-install-1.22.4.0.tar.gz dest={{ tmp_dir }}
+
+- name: install cabal
+  command: chdir={{ cabal_src_dir }} ./bootstrap.sh
+  environment:
+    PATH: "{{ ghc_home }}/bin:{{ ansible_env.PATH }}"
+    PREFIX: "{{ cabal_home }}"
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export PATH={{ cabal_home }}/bin:$PATH'
+
+- name: download haskell-platform install src
+  get_url: url=https://www.haskell.org/platform/download/2014.2.0.0/haskell-platform-2014.2.0.0-srcdist.tar.gz dest={{ tmp_dir }}
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/haskell-platform-2014.2.0.0-srcdist.tar.gz dest={{ tmp_dir }}
+
+- name: gub fix
+  replace: dest={{ haskell_platform_src_dir }}/hptool/hptool.cabal regexp='shake' replace='shake < 0.15'
+
+#    - name: install haskell-platform
+#      command: chdir={{ haskell_platform_src_dir }} ./platform.sh --prefix={{ haskell_platform_home }}
+#      environment:
+#        PATH: "{{ cabal_home }}/bin:{{ ghc_home }}/bin:{{ ansible_env.PATH }}"
+
+- name: cabal install happy
+  command: chdir={{ haskell_platform_src_dir }} cabal install happy
+
+- name: install haskell-platform
+  command: chdir={{ haskell_platform_src_dir }} cabal install --prefix={{ haskell_platform_home }}
+  environment:
+    PATH: "{{ cabal_home }}/bin:{{ ghc_home }}/bin:{{ ansible_env.PATH }}"
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export PATH={{ haskell_platform_home }}/bin:$PATH'
+

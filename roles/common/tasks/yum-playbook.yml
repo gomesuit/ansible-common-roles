@@ -1,0 +1,9 @@
+---
+- name: be sure vim is installed
+  yum: name=vim state=installed
+
+- name: be sure wget is installed
+  yum: name=wget state=installed
+
+- name: be sure git is installed
+  yum: name=git state=installed

@@ -1,0 +1,21 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: ansible_playbook
+  playbook: site.yml
+  hosts: localhost
+  roles_path: roles
+  require_ansible_repo: true
+  ansible_version: 1.9.1-1.el6
+
+platforms:
+  - name: centos-6.4
+    driver_config:
+      provision_command:
+      - curl -L https://www.chef.io/chef/install.sh | bash
+      require_chef_omnibus: false
+
+suites:
+  - name: default

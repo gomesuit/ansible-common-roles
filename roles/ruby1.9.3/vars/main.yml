@@ -1,0 +1,4 @@
+---
+ruby_home: /usr/local/ruby
+tmp_dir: /tmp
+ruby_src_dir: "{{ tmp_dir }}/ruby-1.9.3-p547"

@@ -1,0 +1,6 @@
+---
+- name: install yum packages for ansible
+  yum: name={{ item }} state=latest
+  with_items:
+    - tar
+    - unzip

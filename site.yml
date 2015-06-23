@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  sudo: yes
+  roles:
+    - common
+
+- hosts: test-server
+  sudo: yes
+  roles:
+    - zookeeper

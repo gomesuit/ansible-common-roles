@@ -1,0 +1,3 @@
+---
+- name: be sure timezone is tokyo
+  copy: src=/usr/share/zoneinfo/Asia/Tokyo dest=/etc/localtime

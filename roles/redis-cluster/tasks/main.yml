@@ -1,0 +1,35 @@
+---
+- name: check redis install
+  command: /usr/local/bin/redis-server -v | grep v=3.0.1
+  ignore_errors: True
+  register: isInstallRedis
+  changed_when: false
+  always_run: yes
+
+#    - debug: var=isInstallRedis.stdout_lines
+
+- name: download install src
+  get_url: url=http://download.redis.io/releases/redis-3.0.1.tar.gz dest={{ tmp_dir }}
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/redis-3.0.1.tar.gz dest={{ tmp_dir }}
+
+- name: make redis src
+  command: chdir={{ redis_src_dir }} make
+  when: isInstallRedis|failed
+
+- name: make install redis
+  command: chdir={{ redis_src_dir }} make install
+  when: isInstallRedis|failed
+
+- name: create a directory
+  file: path={{ redis_dir }}/{{ redis_port }} state=directory
+
+- name: set conf
+  template: src=redis.conf.j2 dest={{ redis_dir }}/{{ redis_port }}/redis.conf
+
+#    - name: start redis-server
+#      shell: chdir={{ redis_dir }}/{{ redis_port }} /usr/local/bin/redis-server redis.conf &>/dev/null &
+
+- name: be sure redis is installed
+  gem: name=redis user_install=False

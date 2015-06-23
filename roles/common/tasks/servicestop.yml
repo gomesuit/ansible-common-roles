@@ -1,0 +1,12 @@
+---
+- name: install python-selinux
+  yum: pkg=libselinux-python state=latest
+
+- name: disable selinux
+  selinux: state=disabled
+
+- name: iptables off
+  service: name=iptables state=stopped enabled=no
+
+- name: ip6tables off
+  service: name=ip6tables state=stopped enabled=no

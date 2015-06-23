@@ -1,0 +1,9 @@
+---
+- name: be sure rubygems is installed
+  yum: name=rubygems state=installed
+
+- name: be sure serverspec is installed
+  gem: name=serverspec user_install=False
+
+- name: be sure rake is installed
+  gem: name=rake user_install=False

@@ -1,0 +1,11 @@
+[test-servers]
+192.168.33.11
+
+[serverspec-server]
+192.168.33.11
+
+[redis-cluster-server]
+192.168.33.11
+
+[localhost]
+localhost ansible_connection=local

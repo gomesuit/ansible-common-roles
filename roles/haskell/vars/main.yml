@@ -1,0 +1,10 @@
+---
+haskell_home: /usr/local/haskell
+tmp_dir: /tmp
+haskell_src_dir: /tmp/haskell
+ghc_home: /usr/local/haskell/ghc
+ghc_src_dir: /tmp/ghc-7.8.4
+cabal_home: /usr/local/haskell/cabal
+cabal_src_dir: /tmp/cabal-install-1.22.4.0
+haskell_platform_home: /usr/local/haskell/haskell-platform
+haskell_platform_src_dir: /tmp/haskell-platform-2014.2.0.0
