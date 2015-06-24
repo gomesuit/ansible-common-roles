@@ -4,7 +4,6 @@
   roles:
     - common
 #    - serverspec
-    - ruby
     - bundler
     - docker
   tasks:
