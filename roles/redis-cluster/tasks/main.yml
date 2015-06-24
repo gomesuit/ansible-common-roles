@@ -6,7 +6,7 @@
 #  changed_when: false
 #  always_run: yes
 
-- stat: /usr/local/bin/redis-server
+- stat: path=/usr/local/bin/redis-server
   register: is_installed_redis
 
 - name: download install src
