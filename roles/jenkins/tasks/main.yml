@@ -1,6 +1,6 @@
 ---
 - name: install yum packages
-  yum: name={{ item }} state=latest
+  yum: name={{ item }} state=installed
   with_items:
     - java-1.7.0-openjdk
     - java-1.7.0-openjdk-devel
