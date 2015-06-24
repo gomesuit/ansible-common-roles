@@ -7,12 +7,12 @@
     - openssl-devel
     - gcc
 
-- name: check ruby install
-  command: /usr/local/ruby/bin/ruby --version
-  ignore_errors: True
-  register: isInstallRuby
-  changed_when: false
-  always_run: yes
+#- name: check ruby install
+#  command: /usr/local/ruby/bin/ruby --version
+#  ignore_errors: True
+#  register: isInstallRuby
+#  changed_when: false
+#  always_run: yes
 
 - stat: path=/usr/local/ruby/bin/ruby
   register: is_installed_ruby
