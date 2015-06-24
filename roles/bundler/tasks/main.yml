@@ -1,3 +1,3 @@
 ---
 - name: be sure bundler is installed
-  gem: executable=/usr/local/ruby/bin/gem name=bundler user_install=False
+  gem: executable={{ ruby_home }}/bin/gem name=bundler user_install=False
