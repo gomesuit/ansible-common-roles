@@ -1,0 +1,3 @@
+---
+ruby_home: /usr/local/ruby
+provisioner_home: /home/vagrant/provisioner

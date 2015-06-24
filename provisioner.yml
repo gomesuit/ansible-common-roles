@@ -8,4 +8,4 @@
     - docker
   tasks:
     - name: bundle install for provisioner
-      command: chdir=/home/vagrant/provisioner /usr/local/ruby/bin/bundle
+      command: chdir={{ provisioner_home }} {{ ruby_home }}/bin/bundle
