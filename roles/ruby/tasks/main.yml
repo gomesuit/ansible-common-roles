@@ -5,6 +5,7 @@
     - libffi-devel
     - zlib-devel
     - openssl-devel
+    - gcc
 
 - name: check ruby install
   command: /usr/local/ruby/bin/ruby --version
