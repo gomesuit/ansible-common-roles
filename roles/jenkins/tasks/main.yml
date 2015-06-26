@@ -31,4 +31,7 @@
   with_items: jenkins_jobs_name
 
 - name: set kitchen script
-- copy: src=kitchen.sh dest={{ jenkins_jobs_dir }}/test/workspace/kitchen.sh owner=jenkins group=jenkins mode=755
+  copy: src=kitchen.sh dest={{ jenkins_jobs_dir }}/test/workspace/kitchen.sh owner=jenkins group=jenkins mode=755
+
+- name: add sudoers jenkins user
+  lineinfile: dest=/etc/sudoers backup=yes regexp='^jenkins' line='jenkins ALL=(ALL) NOPASSWD: ALL'
