@@ -17,8 +17,8 @@
 #      with_items:
 #        - { src: "jenkins.j2", dest: "/etc/default/jenkins" }
 
-- file: path="{{ jenkins_jobs_dir }}/{{ item }}" state=directory
-  with_items: jenkins_jobs_name owner=jenkins group=jenkins mode=755
+- file: path="{{ jenkins_jobs_dir }}/{{ item }}" state=directory owner=jenkins group=jenkins mode=755
+  with_items: jenkins_jobs_name
 
-- copy: src={{ item }}/config.xml dest={{ jenkins_jobs_dir }}/{{ item }}/config.xml
-  with_items: jenkins_jobs_name owner=jenkins group=jenkins mode=644
+- copy: src={{ item }}/config.xml dest={{ jenkins_jobs_dir }}/{{ item }}/config.xml owner=jenkins group=jenkins mode=644
+  with_items: jenkins_jobs_name
