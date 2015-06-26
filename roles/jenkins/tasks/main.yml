@@ -23,3 +23,8 @@
 - copy: src=jobs/{{ item }}/config.xml dest={{ jenkins_jobs_dir }}/{{ item }}/config.xml owner=jenkins group=jenkins mode=644
   with_items: jenkins_jobs_name
   notify: restart jenkins
+
+- file: path="{{ jenkins_jobs_dir }}/{{ item }}/workspace" state=directory owner=jenkins group=jenkins mode=755
+  with_items: jenkins_jobs_name
+
+- copy: src=kitchen.sh dest={{ jenkins_jobs_dir }}/test/workspace/kitchen.sh owner=jenkins group=jenkins mode=755
