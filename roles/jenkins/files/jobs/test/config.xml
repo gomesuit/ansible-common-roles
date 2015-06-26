@@ -13,7 +13,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd /var/lib/jenkins/workspace/test/provisioner
+      <command>
+#cd /var/lib/jenkins/workspace/test/provisioner
+pwd
 bundle install
 #sudo -E bundle ex kitchen test
 sudo env PATH=/usr/local/ruby/bin:$PATH bundle ex kitchen test
