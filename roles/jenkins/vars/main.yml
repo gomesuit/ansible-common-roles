@@ -1,0 +1,5 @@
+---
+jenkins_home: /var/lib/jenkins
+jenkins_jobs_dir: "{{ jenkins_home }}/jobs"
+jenkins_jobs_name:
+  - test
