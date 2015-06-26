@@ -7,3 +7,6 @@
 
 - name: be sure git is installed
   yum: name=git state=installed
+
+- name: be sure crontabs is installed
+  yum: name=crontabs state=installed
