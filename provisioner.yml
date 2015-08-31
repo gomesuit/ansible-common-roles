@@ -4,9 +4,9 @@
   roles:
     - common
 #    - serverspec
-    - bundler
-    - docker
-    - jenkins
-  tasks:
-    - name: bundle install for provisioner
-      command: chdir={{ provisioner_home }} {{ ruby_home }}/bin/bundle
+#    - bundler
+#    - docker
+#    - jenkins
+#  tasks:
+#    - name: bundle install for provisioner
+#      command: chdir={{ provisioner_home }} {{ ruby_home }}/bin/bundle
