@@ -1,4 +1,10 @@
 ---
+- name: install yum packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - java-1.7.0-openjdk
+    - java-1.7.0-openjdk-devel
+
 - name: download install src
   get_url: url=http://ftp.kddilabs.jp/infosystems/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz dest={{ tmp_dir }}/apache-maven-3.3.9-bin.tar.gz
 
