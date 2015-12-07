@@ -3,4 +3,4 @@
   sudo: yes
   roles:
     - common
-    - maven3.3.9
+    - maven3.1.1
