@@ -4,3 +4,4 @@
   roles:
     - common
     - maven3.1.1
+    - zookeeper
