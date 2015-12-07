@@ -1,0 +1,22 @@
+---
+- name: download install src
+  get_url: url=http://ftp.kddilabs.jp/infosystems/apache/storm/apache-storm-0.10.0/apache-storm-0.10.0.tar.gz dest={{ tmp_dir }}/apache-storm-0.10.0.tar.gz
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/apache-storm-0.10.0.tar.gz dest=/usr/local/ copy=no
+
+#- name: copy dir
+#  copy: src={{ tmp_dir }}/apache-storm-0.10.0/ dest=/usr/local/storm0.10.0/ directory_mode=yes remote_src=True
+
+- name: make link
+  file: src=/usr/local/apache-storm-0.10.0 dest=/usr/local/storm0.10.0 state=link
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/storm0.10.0/bin:$PATH'
+
+- name: set global conf
+  file: src=storm.yaml dest=/usr/local/storm0.10.0/conf/storm.yaml
+
+- name: set local conf
+  file: src=local.storm.yaml dest=/root/.storm.yaml
+

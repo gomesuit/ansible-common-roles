@@ -5,3 +5,4 @@
     - common
     - maven3.1.1
     - zookeeper
+    - storm0.10.0
