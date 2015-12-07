@@ -15,8 +15,11 @@
   lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/storm0.10.0/bin:$PATH'
 
 - name: set global conf
-  file: src=storm.yaml dest=/usr/local/storm0.10.0/conf/storm.yaml
+  copy: src=storm.yaml dest=/usr/local/storm0.10.0/conf/storm.yaml
+
+#- name: make conf file
+#  file: path=/root/.storm.yaml state=touch
 
 - name: set local conf
-  file: src=local.storm.yaml dest=/root/.storm.yaml
+  copy: src=.storm.yaml dest=/root/.storm.yaml
 
