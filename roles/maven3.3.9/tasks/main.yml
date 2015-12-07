@@ -9,10 +9,10 @@
   get_url: url=http://ftp.kddilabs.jp/infosystems/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz dest={{ tmp_dir }}/apache-maven-3.3.9-bin.tar.gz
 
 - name: unarchive src file
-  unarchive: src={{ tmp_dir }}/apache-maven-3.3.9-bin.tar.gz dest={{ tmp_dir }}
+  unarchive: src={{ tmp_dir }}/apache-maven-3.3.9-bin.tar.gz dest={{ tmp_dir }} copy=no
 
 - name: copy dir
-  copy: src={{ tmp_dir }}/apache-maven-3.3.9 dest=/usr/local/maven3.3.9
+  copy: src={{ tmp_dir }}/apache-maven-3.3.9/ dest=/usr/local/maven3.3.9/
 
 - name: export path
   lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/maven3.3.9/bin:$PATH'
