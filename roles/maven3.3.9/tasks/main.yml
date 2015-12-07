@@ -14,6 +14,9 @@
 - name: copy dir
   copy: src={{ tmp_dir }}/apache-maven-3.3.9/ dest=/usr/local/maven3.3.9/
 
+- name: chmod
+  file: path=/usr/local/maven3.3.9/bin/mvn mode=755
+
 - name: export path
   lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/maven3.3.9/bin:$PATH'
 
