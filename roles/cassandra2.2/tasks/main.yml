@@ -9,10 +9,14 @@
   get_url: url=http://ftp.riken.jp/net/apache/cassandra/2.2.4/apache-cassandra-2.2.4-bin.tar.gz dest={{ tmp_dir }}/
 
 - name: unarchive src file
-  unarchive: src={{ tmp_dir }}/apache-maven-3.1.1-bin.tar.gz dest={{ tmp_dir }} copy=no
+  unarchive: src={{ tmp_dir }}/apache-cassandra-2.2.4-bin.tar.gz dest=/usr/local/ copy=no
 
-- name: copy dir
-  copy: src={{ tmp_dir }}/apache-cassandra-2.2.4/ dest=/usr/local/cassandra-2.2.4/
+#- name: copy dir
+#  copy: src={{ tmp_dir }}/apache-cassandra-2.2.4/ dest=/usr/local/cassandra-2.2.4/
+
+- name: make link
+  file: src=/usr/local/apache-cassandra-2.2.4 dest=/usr/local/cassandra-2.2.4 state=link
+
 
 #- name: chmod
 #  file: path=/usr/local/maven3.1.1/bin/mvn mode=755
