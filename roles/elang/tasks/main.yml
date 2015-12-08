@@ -1,6 +1,6 @@
 ---
-- name: install java-1.7.0
-  yum: name=java-1.7.0-openjdk state=installed
-
 - name: privileged_script.sh
   script: privileged_script.sh creates=/tmp/cprivileged_script.txt
+
+
+
