@@ -1,4 +1,15 @@
 ---
+- name: install yum packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - zlib-devel
+    - bzip2-devel
+    - openssl-devel
+    - ncurses-devel
+    - sqlite-devel
+    - readline-devel
+    - tk-devel
+
 - name: download install src
   get_url: url=https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz dest={{ tmp_dir }}
 
