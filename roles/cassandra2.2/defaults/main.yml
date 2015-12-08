@@ -1,0 +1,3 @@
+---
+tmp_dir: /tmp
+cassandra_home: /usr/local/cassandra
