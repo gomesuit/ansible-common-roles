@@ -6,7 +6,7 @@
 #    - serverspec
 #    - bundler
 #    - docker
-    - jenkins
+#    - jenkins
 #  tasks:
 #    - name: bundle install for provisioner
 #      command: chdir={{ provisioner_home }} {{ ruby_home }}/bin/bundle
