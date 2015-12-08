@@ -28,5 +28,9 @@
 - name: export path
   lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/python2.7/bin:$PATH'
 
+- name: wget get-pip.py
+  get_url: url=https://bootstrap.pypa.io/get-pip.py dest={{ tmp_dir }}
+
 - name: install pip-7.1.2 setuptools-18.7.1 wheel-0.26.0
-  command: curl -kL https://bootstrap.pypa.io/get-pip.py | /usr/local/python2.7/bin/python2.7 creates=/usr/local/python2.7/lib/python2.7/site-packages/pip
+  command: /usr/local/python2.7/bin/python2.7 {{tmp_dir}}/get-pip.py creates=/usr/local/python2.7/lib/python2.7/site-packages/pip
+
