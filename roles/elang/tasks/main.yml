@@ -15,11 +15,11 @@
 - name: install erlang-solutions-1.0-1.noarch.rpm
   yum: name=http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
 
-- name: off repo
-  replace: "dest=/etc/yum.repos.d/epel.repo backup=yes regexp='^enabled=1$' line='enabled=0'"
+- name: replace epel.repo
+  replace: "dest=/etc/yum.repos.d/epel.repo backup=yes regexp='^enabled=1$' replace='enabled=0'"
 
-- name: off repo
-  replace: "dest=/etc/yum.repos.d/erlang_solutions.repo backup=yes regexp='^enabled=1$' line='enabled=0'"
+- name: replace erlang_solutions.repo
+  replace: "dest=/etc/yum.repos.d/erlang_solutions.repo backup=yes regexp='^enabled=1$' replace='enabled=0'"
 
 - name: install erlang
   yum: name=erlang enablerepo="epel,erlang_solutions"
