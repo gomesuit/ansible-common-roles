@@ -1,6 +1,52 @@
 ---
-- name: privileged_script.sh
-  script: privileged_script.sh creates=/tmp/cprivileged_script.txt
+- name: install yum packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - zlib
+    - zlib-devel
+    - binutils
+    - perl
+    - gcc
+    - gcc-c++
 
+- name: install epel-release-6-8.noarch.rpm
+  yum: name=https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
+- name: install erlang-solutions-1.0-1.noarch.rpm
+  yum: name=http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
 
+- name: off repo
+  lineinfile: "dest=/etc/yum.repos.d/epel.repo backup=yes regexp='^enabled=1$' line='enabled=0'"
+
+- name: off repo
+  lineinfile: "dest=/etc/yum.repos.d/erlang_solutions.repo backup=yes regexp='^enabled=1$' line='enabled=0'"
+
+- name: install erlang
+  yum: name=erlang enablerepo="epel,erlang_solutions"
+
+- name: install rabbitmq-server-3.1.5-1.noarch.rpm
+  yum: name=https://www.rabbitmq.com/releases/rabbitmq-server/v3.1.5/rabbitmq-server-3.1.5-1.noarch.rpm
+
+- name: make erlang.cookie
+  copy: src=erlang.cookie dest=/var/lib/rabbitmq/.erlang.cookie owner=rabbitmq group=rabbitmq mode=400
+
+- name: enable plugin
+  command: rabbitmq-plugins enable rabbitmq_management
+
+- name: enable plugin
+  command: rabbitmq-plugins enable rabbitmq_shovel
+
+- name: enable plugin
+  command: rabbitmq-plugins enable rabbitmq_shovel_management
+
+#- name: privileged_script.sh
+#  script: privileged_script.sh creates=/tmp/cprivileged_script.txt
+
+- name: set conf
+  copy: src=rabbitmq.config dest=/etc/rabbitmq/rabbitmq.config
+
+- name: set hosts
+  lineinfile: dest=/etc/hosts line='192.168.33.10 bunny1'
+
+- name: set hosts
+  lineinfile: dest=/etc/hosts line='192.168.33.11 bunny2'
