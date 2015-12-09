@@ -27,5 +27,5 @@
   lineinfile: dest=/root/.bash_profile line='export PATH={{cassandra_home}}/bin:$PATH'
 
 - name: set env
-  lineinfile: dest=/root/.bash_profile line='export CQLSH_HOST={{cassamdra_host}}'
+  lineinfile: dest=/root/.bash_profile line='export CQLSH_HOST={{cassandra_host}}'
 
