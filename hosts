@@ -11,6 +11,6 @@
 localhost ansible_connection=local
 
 [cassandra]
-cassandra1 ansible_connection=local
-cassandra2 ansible_connection=local
+cassandra1 
+cassandra2 
 
