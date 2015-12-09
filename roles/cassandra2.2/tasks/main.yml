@@ -17,9 +17,15 @@
 - name: copy dir
   command: cp -r {{ tmp_dir }}/apache-cassandra-2.2.4 {{cassandra_home}} creates={{cassandra_home}}
 
+- name: set conf
+  template: src=cassandra.yaml dest={{cassandra_home}}/conf/cassandra.yaml
+
 #- name: make link
 #  file: src=/usr/local/apache-cassandra-2.2.4 dest={{cassandra_home}} state=link
 
 - name: export path
   lineinfile: dest=/root/.bash_profile line='export PATH={{cassandra_home}}/bin:$PATH'
+
+- name: set env
+  lineinfile: dest=/root/.bash_profile line='export CQLSH_HOST={{cassamdra_host}}'
 

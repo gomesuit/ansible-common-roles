@@ -1,3 +1,4 @@
 ---
 tmp_dir: /tmp
 cassandra_home: /usr/local/cassandra
+cassamdra_host: 127.0.0.1

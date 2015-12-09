@@ -1,2 +1,3 @@
 ---
 cassandra_home: /usr/local/cassandra1
+cassamdra_host: 192.168.33.11
