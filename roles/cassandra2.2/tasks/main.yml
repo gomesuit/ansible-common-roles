@@ -30,11 +30,14 @@
   lineinfile: dest=/root/.bash_profile line='export CQLSH_HOST={{cassandra_host}}'
 
 - name: check running cassandra
-  shell: ps aux | grep cassandra
+  shell: ps aux | grep [C]assandraDaemon | wc -l
   register: cassandra_process
+  changed_when: false
+  always_run: yes
 
-- debug: var=cassandra_process
+#- debug: var=cassandra_process
 
-#- name: run cassandra
-#  command: /usr/local/cassandra/bin/cassandra
+- name: run cassandra
+  command: /usr/local/cassandra/bin/cassandra
+  when: cassandra_process.stdout == "0"
 
