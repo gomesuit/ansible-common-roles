@@ -11,6 +11,6 @@
 localhost ansible_connection=local
 
 [cassandra]
-cassandra1 
-cassandra2 
+cassandra1 ansible_ssh_pass=vagrant 
+cassandra2 ansible_ssh_pass=vagrant
 
