@@ -29,3 +29,12 @@
 - name: set env
   lineinfile: dest=/root/.bash_profile line='export CQLSH_HOST={{cassandra_host}}'
 
+- name: check running cassandra
+  shell: ps aux | grep cassandra
+  register: cassandra_process
+
+- debug: var=cassandra_process
+
+#- name: run cassandra
+#  command: /usr/local/cassandra/bin/cassandra
+
