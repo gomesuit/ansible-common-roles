@@ -40,4 +40,10 @@
 - name: run cassandra
   command: /usr/local/cassandra/bin/cassandra
   when: cassandra_process.stdout == "0"
+  async: 15
+  poll: 0
+
+- name: wait for run cassandra
+  wait_for: host={{cassandra_host}} port=9042 delay=10 state=started timeout=300
+  when: cassandra_process.stdout == "0"
 
