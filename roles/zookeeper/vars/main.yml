@@ -1,6 +1,0 @@
----
-home_dir: /root
-zookeeper_dir: /root/zookeeper-3.4.7
-zookeeper_port: 2181
-zookeeper_data: data
-tmp_dir: /tmp
