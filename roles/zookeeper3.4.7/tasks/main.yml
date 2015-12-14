@@ -2,14 +2,14 @@
 - name: install java-1.7.0
   yum: name=java-1.7.0-openjdk state=installed
 
-#- name: download install src
-#  get_url: url=http://www.apache.org/dist/zookeeper/zookeeper-3.4.7/zookeeper-3.4.7.tar.gz dest={{tmp_dir}}
-
-- name: unarchive src file
-  unarchive: url=http://www.apache.org/dist/zookeeper/zookeeper-3.4.7/zookeeper-3.4.7.tar.gz dest={{user_local}}
+- name: download install src
+  get_url: url=http://www.apache.org/dist/zookeeper/zookeeper-3.4.7/zookeeper-3.4.7.tar.gz dest={{tmp_dir}}
 
 #- name: unarchive src file
-#  unarchive: src={{tmp_dir}}/zookeeper-3.4.7.tar.gz dest={{home_dir}}
+#  unarchive: src=http://www.apache.org/dist/zookeeper/zookeeper-3.4.7/zookeeper-3.4.7.tar.gz dest={{user_local}}
+
+- name: unarchive src file
+  unarchive: src={{tmp_dir}}/zookeeper-3.4.7.tar.gz dest={{user_local}}
 
 - name: create link
   file: src={{user_local}}/zookeeper-3.4.7 dest={{zookeeper_home}} state=link

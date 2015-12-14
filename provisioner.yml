@@ -7,6 +7,7 @@
 #    - bundler
 #    - docker
 #    - jenkins
+    - zookeeper3.4.7
 #  tasks:
 #    - name: bundle install for provisioner
 #      command: chdir={{ provisioner_home }} {{ ruby_home }}/bin/bundle
