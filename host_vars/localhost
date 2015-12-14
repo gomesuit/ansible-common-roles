@@ -1,3 +1,6 @@
 ---
 ruby_home: /usr/local/ruby
 provisioner_home: /home/vagrant/provisioner
+cassandra_home: /usr/local/cassandra
+cassandra_host: 192.168.33.11
+cassandra_seed: 192.168.33.11
