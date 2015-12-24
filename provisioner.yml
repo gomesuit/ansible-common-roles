@@ -7,7 +7,12 @@
 #    - bundler
 #    - docker
 #    - jenkins
-    - zookeeper3.4.7
+#    - zookeeper3.4.7
+#    - python2.7
+#    - cassandra2.2
+#    - maven3.3.9
+#    - ruby
+    - memcached1.4
 #  tasks:
 #    - name: bundle install for provisioner
 #      command: chdir={{ provisioner_home }} {{ ruby_home }}/bin/bundle

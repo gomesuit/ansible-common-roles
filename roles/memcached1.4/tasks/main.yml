@@ -1,0 +1,28 @@
+---
+- name: install yum packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - libevent-devel
+#    - perl-Test-Harness-3.17-141.el6_7.1
+
+- name: download install src
+  get_url: url=http://memcached.org/files/memcached-1.4.25.tar.gz dest={{ tmp_dir }}
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/memcached-1.4.25.tar.gz dest={{ tmp_dir }} copy=no
+
+- name: configure src
+  command: chdir={{ tmp_dir }}/memcached-1.4.25 ./configure --prefix=/usr/local/memcached-1.4.25 creates=/usr/local/memcached-1.4.25
+
+- name: make src
+  command: chdir={{ tmp_dir }}/memcached-1.4.25 make creates=/usr/local/memcached-1.4.25
+
+#- name: make test
+#  command: chdir={{ tmp_dir }}/memcached-1.4.25 make test creates=/usr/local/memcached-1.4.25
+
+- name: make install src
+  command: chdir={{ tmp_dir }}/memcached-1.4.25 make install creates=/usr/local/memcached-1.4.25
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/memcached-1.4.25/bin:$PATH'
+
