@@ -35,3 +35,6 @@
 #- name: init database
 #  command: chdir=/usr/local/mysql-5.6.28 scripts/mysql_install_db --user=mysql
 
+- name: set conf
+  copy: src=my.cnf dest=/etc/my.cnf
+
