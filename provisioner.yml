@@ -13,7 +13,7 @@
 #    - maven3.3.9
 #    - ruby
 #    - memcached1.4
-    - mysql5.6
+#    - mysql5.6
 #  tasks:
 #    - name: bundle install for provisioner
 #      command: chdir={{ provisioner_home }} {{ ruby_home }}/bin/bundle
