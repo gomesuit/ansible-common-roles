@@ -49,7 +49,7 @@
   file: path=/usr/local/memcached-1.4.25/var/lock state=directory recurse=yes owner=memcached group=memcached mode=755
 
 - name: mkdir conf directory
-  file: path=/usr/local/memcached-1.4.25/conf state=directory recurse=yes owner=memcached group=memcached mode=755
+  file: path=/usr/local/memcached-1.4.25/conf state=directory recurse=yes mode=755
 
 - name: set conf
   copy: src=memcached.conf dest=/usr/local/memcached-1.4.25/conf/memcached
