@@ -12,7 +12,7 @@
 #    - cassandra2.2
 #    - maven3.3.9
 #    - ruby
-#    - memcached1.4
+    - memcached1.4
 #    - mysql5.6
 #  tasks:
 #    - name: bundle install for provisioner
