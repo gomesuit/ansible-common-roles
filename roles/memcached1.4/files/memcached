@@ -42,14 +42,14 @@ start () {
 		chown $USER /usr/local/memcached-1.4.25/var/run
 	fi
 
-	daemon --pidfile ${pidfile} memcached -d -p $PORT -u $USER  -m $CACHESIZE -c $MAXCONN -P ${pidfile} $OPTIONS
+	daemon --pidfile ${pidfile} /usr/local/memcached-1.4.25/bin/memcached -d -p $PORT -u $USER  -m $CACHESIZE -c $MAXCONN -P ${pidfile} $OPTIONS
 	RETVAL=$?
 	echo
 	[ $RETVAL -eq 0 ] && touch ${lockfile}
 }
 stop () {
 	echo -n $"Stopping $prog: "
-	killproc -p ${pidfile} /usr/bin/memcached
+	killproc -p ${pidfile} /usr/local/memcached-1.4.25/bin/memcached
 	RETVAL=$?
 	echo
 	if [ $RETVAL -eq 0 ] ; then
