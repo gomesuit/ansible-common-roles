@@ -2,6 +2,7 @@
 - name: install yum packages
   yum: name={{ item }} state=installed
   with_items:
+    - libevent
     - libevent-devel
 #    - perl-Test-Harness-3.17-141.el6_7.1
 
@@ -36,7 +37,19 @@
   lineinfile: dest=/home/memcached/.bash_profile line='export PATH=/usr/local/memcached-1.4.25/bin:$PATH'
 
 - name: set service script
-  copy: src=memcached-init dest=/etc/init.d/memcached mode=0755
+  copy: src=memcached dest=/etc/init.d/memcached mode=0755
 
-- name: set service script
-  copy: src=scripts dest=/usr/local/memcached-1.4.25
+#- name: set script
+#  copy: src=scripts dest=/usr/local/memcached-1.4.25
+
+- name: mkdir run directory
+  file: path=/usr/local/memcached-1.4.25/var/run state=directory recurse=yes owner=memcached group=memcached mode=755
+
+- name: mkdir lock directory
+  file: path=/usr/local/memcached-1.4.25/var/lock state=directory recurse=yes owner=memcached group=memcached mode=755
+
+- name: mkdir conf directory
+  file: path=/usr/local/memcached-1.4.25/conf state=directory recurse=yes owner=memcached group=memcached mode=755
+
+- name: set conf
+  copy: src=memcached.conf dest=/usr/local/memcached-1.4.25/conf/memcached

@@ -18,8 +18,8 @@ MAXCONN=1024
 CACHESIZE=64
 OPTIONS=""
 
-if [ -f /etc/sysconfig/memcached ];then 
-	. /etc/sysconfig/memcached
+if [ -f /usr/local/memcached-1.4.25/conf/memcached ];then 
+	. /usr/local/memcached-1.4.25/conf/memcached
 fi
 
 # Check that networking is up.
@@ -32,14 +32,14 @@ fi
 
 RETVAL=0
 prog="memcached"
-pidfile=${PIDFILE-/var/run/memcached/memcached.pid}
-lockfile=${LOCKFILE-/var/lock/subsys/memcached}
+pidfile=${PIDFILE-/usr/local/memcached-1.4.25/var/run/memcached.pid}
+lockfile=${LOCKFILE-/usr/local/memcached-1.4.25/var/lock/memcached}
 
 start () {
 	echo -n $"Starting $prog: "
-	# Ensure that /var/run/memcached has proper permissions
-	if [ "`stat -c %U /var/run/memcached`" != "$USER" ]; then
-		chown $USER /var/run/memcached
+	# Ensure that /usr/local/memcached-1.4.25/var/run/memcached has proper permissions
+	if [ "`stat -c %U /usr/local/memcached-1.4.25/var/run`" != "$USER" ]; then
+		chown $USER /usr/local/memcached-1.4.25/var/run
 	fi
 
 	daemon --pidfile ${pidfile} memcached -d -p $PORT -u $USER  -m $CACHESIZE -c $MAXCONN -P ${pidfile} $OPTIONS
