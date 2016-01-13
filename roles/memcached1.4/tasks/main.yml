@@ -34,3 +34,9 @@
 
 - name: export path
   lineinfile: dest=/home/memcached/.bash_profile line='export PATH=/usr/local/memcached-1.4.25/bin:$PATH'
+
+- name: set service script
+  copy: src=memcached-init dest=/etc/init.d/memcached mode=0755
+
+- name: set service script
+  copy: src=scripts dest=/usr/local/memcached-1.4.25
