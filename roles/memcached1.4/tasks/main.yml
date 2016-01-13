@@ -5,6 +5,9 @@
     - libevent-devel
 #    - perl-Test-Harness-3.17-141.el6_7.1
 
+#- name: download install src
+#  get_url: url=https://github.com/libevent/libevent/archive/release-1.4.15-stable.tar.gz dest={{ tmp_dir }}
+
 - name: download install src
   get_url: url=http://memcached.org/files/memcached-1.4.25.tar.gz dest={{ tmp_dir }}
 
@@ -23,6 +26,11 @@
 - name: make install src
   command: chdir={{ tmp_dir }}/memcached-1.4.25 make install creates=/usr/local/memcached-1.4.25
 
-- name: export path
-  lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/memcached-1.4.25/bin:$PATH'
+- name: add memcached group
+  group: name=memcached
 
+- name: add memcached user
+  user: name=memcached group=memcached
+
+- name: export path
+  lineinfile: dest=/home/memcached/.bash_profile line='export PATH=/usr/local/memcached-1.4.25/bin:$PATH'
