@@ -1,0 +1,8 @@
+---
+home_dir: /root
+user_local: /usr/local
+zookeeper_home: '{{user_local}}/zookeeper'
+zookeeper_port: 2181
+zookeeper_data: '{{zookeeper_home}}/data'
+zookeeper_version: 3.4.6
+tmp_dir: /tmp
