@@ -48,7 +48,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>rm -rf $projectName
+      <command>export PYTHONIOENCODING=utf-8
+
+rm -rf $projectName
 git clone $repositoryUrl $projectName
 cd $projectName
 git checkout $tagName
