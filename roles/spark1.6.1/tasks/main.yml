@@ -14,3 +14,7 @@
 
 - name: export path
   lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/spark/bin:$PATH'
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export SPARK_HOME=/usr/local/spark'
+
