@@ -1,0 +1,15 @@
+---
+- name: download install src
+  get_url: url=wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1.tgz dest={{ tmp_dir }}
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/spark-1.6.1.tgz dest=/usr/local/ copy=no
+
+- name: make link
+  file: src=/usr/local/spark-1.6.1 dest=/usr/local/spark state=link
+
+- name: build src
+  command: chdir=/usr/local/spark creates=/usr/local/spark/target build/mvn -DskipTests clean package
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/spark/bin:$PATH'
