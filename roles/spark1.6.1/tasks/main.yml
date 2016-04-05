@@ -1,6 +1,6 @@
 ---
 - name: download install src
-  get_url: url=wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1.tgz dest={{ tmp_dir }}
+  get_url: url=http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1.tgz dest={{ tmp_dir }}
 
 - name: unarchive src file
   unarchive: src={{ tmp_dir }}/spark-1.6.1.tgz dest=/usr/local/ copy=no
