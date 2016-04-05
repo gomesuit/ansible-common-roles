@@ -10,6 +10,7 @@
 
 - name: build src
   command: chdir=/usr/local/spark creates=/usr/local/spark/target build/mvn -DskipTests clean package
+  ignore_errors: True
 
 - name: export path
   lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/spark/bin:$PATH'
