@@ -4,3 +4,4 @@
   roles:
     - common
     - spark1.6.1
+    - maven3.1.1
