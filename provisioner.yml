@@ -6,7 +6,7 @@
 #    - serverspec
 #    - bundler
 #    - docker
-    - jenkins
+#    - jenkins
 #    - zookeeper3.4
 #    - python2.7
 #    - cassandra2.2
