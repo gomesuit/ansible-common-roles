@@ -24,3 +24,6 @@
 - name: export path
   lineinfile: dest=/root/.bash_profile line='export SPARK_HOME=/usr/local/spark'
 
+- name: build example src
+  command: chdir=/usr/local/spark/examples creates=/usr/local/spark/examples/target ../build/mvn -DskipTests clean package
+
