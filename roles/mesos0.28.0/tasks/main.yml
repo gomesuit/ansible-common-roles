@@ -4,6 +4,7 @@
   with_items:
     - autoconf
     - gcc
+    - gcc-c++
     - patch
     - zlib
     - zlib-devel
