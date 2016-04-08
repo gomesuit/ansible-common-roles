@@ -1,0 +1,41 @@
+---
+- name: install yum packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - autoconf
+    - gcc
+    - patch
+    - zlib
+    - zlib-devel
+    - libcurl-devel
+    - apr-devel
+    - subversion-devel
+    - cyrus-sasl-md5
+    - java-1.8.0-openjdk
+    - java-1.8.0-openjdk-devel
+    - maven
+    - python-devel
+
+- name: download install src
+  get_url: url=http://www.apache.org/dist/mesos/0.28.0/mesos-0.28.0.tar.gz dest={{ tmp_dir }}
+
+- name: unarchive src file
+  unarchive: src={{ tmp_dir }}/mesos-0.28.0.tar.gz dest={{ tmp_dir }} copy=no
+
+- name: make build directory
+  file: path={{ tmp_dir }}/mesos-0.28.0/build state=directory
+
+- name: configure src
+  command: chdir={{ tmp_dir }}/mesos-0.28.0/build ../configure --prefix=/usr/local/mesos0.28.0 creates=/usr/local/mesos0.28.0
+
+- name: make
+  command: chdir={{ tmp_dir }}/mesos-0.28.0/build make creates=/usr/local/mesos0.28.0
+
+- name: make install
+  command: chdir={{ tmp_dir }}/mesos-0.28.0/build make install creates=/usr/local/mesos0.28.0
+
+- name: make link
+  file: src=/usr/local/mesos0.28.0 dest=/usr/local/mesos state=link
+
+- name: export path
+  lineinfile: dest=/root/.bash_profile line='export PATH=/usr/local/mesos/bin:$PATH'
