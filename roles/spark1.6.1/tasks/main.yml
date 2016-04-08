@@ -1,4 +1,10 @@
 ---
+- name: install yum packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - java-1.7.0-openjdk
+    - java-1.7.0-openjdk-devel
+
 - name: download install src
   get_url: url=http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1.tgz dest={{ tmp_dir }}
 
