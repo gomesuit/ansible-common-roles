@@ -2,14 +2,15 @@
 - name: install java-1.7.0
   yum: name=java-1.7.0-openjdk state=installed
 
-- name: download install src
-  get_url: url=https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.1/elasticsearch-2.3.1.tar.gz dest={{tmp_dir}}
+- name: create elasticsearch user
+  user: name={{elasticsearch_user}}
 
 - name: unarchive src file
-  unarchive: src={{tmp_dir}}/elasticsearch-2.3.1.tar.gz dest=/usr/local
+  unarchive:
+  	src: https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.1/elasticsearch-2.3.1.tar.gz
+  	dest: /usr/local
+  	copy: no
+  	owner: {{elasticsearch_user}}
 
 - name: create link
   file: src=/usr/local/elasticsearch-2.3.1 dest=/usr/local/elasticsearch state=link
-
-- name: create elasticsearch user
-  user: name={{elasticsearch_user}}
