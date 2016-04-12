@@ -5,12 +5,25 @@
 - name: create elasticsearch user
   user: name={{elasticsearch_user}}
 
+- name: download install src
+  get_url:
+    url=https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.1/elasticsearch-2.3.1.tar.gz
+    dest={{tmp_dir}}
+
 - name: unarchive src file
   unarchive:
-  	src: https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.1/elasticsearch-2.3.1.tar.gz
-  	dest: /usr/local
-  	copy: no
-  	owner: {{elasticsearch_user}}
+    src: '{{tmp_dir}}/elasticsearch-2.3.1.tar.gz'
+    dest: /usr/local
+    copy: no
+
+- name: change ownership
+  file:
+    path=/usr/local/elasticsearch-2.3.1
+    owner={{elasticsearch_user}}
 
 - name: create link
-  file: src=/usr/local/elasticsearch-2.3.1 dest=/usr/local/elasticsearch state=link
+  file:
+    src=/usr/local/elasticsearch-2.3.1
+    dest=/usr/local/elasticsearch
+    state=link
+    owner={{elasticsearch_user}}
