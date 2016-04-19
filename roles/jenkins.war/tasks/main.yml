@@ -1,0 +1,24 @@
+---
+- name: install java-1.7.0
+  yum: name=java-1.7.0-openjdk state=installed
+
+- name: create jenkins user
+  user: name={{JENKINS_USER}}
+
+- name: create jenkins home
+  file:
+    path={{JENKINS_HOME}}
+    state=directory
+
+- name: download install src
+  get_url:
+    url=http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
+    dest={{JENKINS_HOME}}
+
+- name: change ownership
+  file:
+    path={{JENKINS_HOME}}
+    owner={{JENKINS_USER}}
+    group={{JENKINS_USER}}
+    recurse=yes
+

@@ -1,0 +1,4 @@
+---
+tmp_dir: /tmp
+JENKINS_USER: vagrant
+JENKINS_HOME: /usr/local/jenkins
