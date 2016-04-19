@@ -23,9 +23,3 @@
     owner={{JENKINS_USER}}
     group={{JENKINS_USER}}
     recurse=yes
-
-- name: regist env
-  lineinfile:
-    dest={{JENKINS_USER_HOME}}/.bash_profile
-    line='export JENKINS_HOME={{JENKINS_EXEC_HOME}}'
-

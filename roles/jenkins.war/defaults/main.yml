@@ -3,6 +3,7 @@ tmp_dir           : /tmp
 JENKINS_USER      : vagrant
 JENKINS_USER_HOME : /home/vagrant
 JENKINS_HOME      : '{{JENKINS_USER_HOME}}/jenkins'
-JENKINS_EXEC_HOME : '{{JENKINS_HOME}}/data'
-JENKINS_CONFIG    : '{{JENKINS_HOME}}/conf/jenkins'
+JENKINS_WEB_ROOT  : '{{JENKINS_HOME}}/war'
+JENKINS_CONFIG    : '{{JENKINS_HOME}}/conf/jenkins.conf'
 JENKINS_PID_FILE  : '{{JENKINS_HOME}}/var/run/jenkins.pid'
+JENKINS_LOG_DIR   : '{{JENKINS_HOME}}/logs'
