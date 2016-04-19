@@ -23,3 +23,17 @@
     owner={{JENKINS_USER}}
     group={{JENKINS_USER}}
     recurse=yes
+
+- name: setting conf file
+  template:
+    src=jenkins.conf
+    dest={{JENKINS_HOME}}/conf/jenkins.conf
+    owner={{JENKINS_USER}}
+    group={{JENKINS_USER}}
+
+- name: setting control script
+  template:
+    src=jenkinsctl
+    dest={{JENKINS_HOME}}/bin/jenkinsctl
+    owner={{JENKINS_USER}}
+    group={{JENKINS_USER}}
