@@ -122,7 +122,7 @@ case "$1" in
 	;;
     stop)
 	echo -n "Shutting down Jenkins "
-	killproc jenkins
+	killproc -p "$JENKINS_PID_FILE" jenkins
 	RETVAL=$?
 	echo
 	;;

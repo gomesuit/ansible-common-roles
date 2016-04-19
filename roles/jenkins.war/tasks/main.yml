@@ -5,17 +5,36 @@
     state=installed
 
 - name: create jenkins user
-  user: name={{JENKINS_USER}}
+  user:
+    name={{JENKINS_USER}}
 
 - name: create jenkins home
   file:
-    path={{JENKINS_HOME}}
+    path={{item}}
     state=directory
+    recurse=yes
+  with_items:
+    - '{{JENKINS_HOME}}/conf'
+    - '{{JENKINS_HOME}}/bin'
+    - '{{JENKINS_HOME}}/war'
+    - '{{JENKINS_HOME}}/logs'
+    - '{{JENKINS_HOME}}/var/run'
 
 - name: download install src
   get_url:
     url=http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
     dest={{JENKINS_HOME}}
+
+- name: setting conf file
+  template:
+    src=jenkins.conf
+    dest={{JENKINS_HOME}}/conf/jenkins.conf
+
+- name: setting control script
+  template:
+    src=jenkinsctl
+    dest={{JENKINS_HOME}}/bin/jenkinsctl
+    mode=755
 
 - name: change ownership
   file:
@@ -24,16 +43,3 @@
     group={{JENKINS_USER}}
     recurse=yes
 
-- name: setting conf file
-  template:
-    src=jenkins.conf
-    dest={{JENKINS_HOME}}/conf/jenkins.conf
-    owner={{JENKINS_USER}}
-    group={{JENKINS_USER}}
-
-- name: setting control script
-  template:
-    src=jenkinsctl
-    dest={{JENKINS_HOME}}/bin/jenkinsctl
-    owner={{JENKINS_USER}}
-    group={{JENKINS_USER}}
