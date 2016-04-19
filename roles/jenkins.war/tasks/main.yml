@@ -1,6 +1,8 @@
 ---
 - name: install java-1.7.0
-  yum: name=java-1.7.0-openjdk state=installed
+  yum:
+    name=java-1.7.0-openjdk
+    state=installed
 
 - name: create jenkins user
   user: name={{JENKINS_USER}}
@@ -21,4 +23,9 @@
     owner={{JENKINS_USER}}
     group={{JENKINS_USER}}
     recurse=yes
+
+- name: regist env
+  lineinfile:
+    dest={{JENKINS_USER_HOME}}/.bash_profile
+    line='export JENKINS_HOME={{JENKINS_EXEC_HOME}}'
 
