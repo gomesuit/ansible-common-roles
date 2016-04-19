@@ -31,7 +31,7 @@
 ### END INIT INFO
 
 # Check for missing binaries (stale symlinks should not happen)
-JENKINS_WAR="/usr/lib/jenkins/jenkins.war"
+JENKINS_WAR="{{JENKINS_HOME}}/jenkins.war"
 test -r "$JENKINS_WAR" || { echo "$JENKINS_WAR not installed"; 
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 5; fi; }
@@ -65,13 +65,6 @@ JENKINS_PID_FILE="/var/run/jenkins.pid"
 # that /usr/bin/java may not always point to Java >= 1.6
 # see http://www.nabble.com/guinea-pigs-wanted-----Hudson-RPM-for-RedHat-Linux-td25673707.html
 candidates="
-/etc/alternatives/java
-/usr/lib/jvm/java-1.6.0/bin/java
-/usr/lib/jvm/jre-1.6.0/bin/java
-/usr/lib/jvm/java-1.7.0/bin/java
-/usr/lib/jvm/jre-1.7.0/bin/java
-/usr/lib/jvm/java-1.8.0/bin/java
-/usr/lib/jvm/jre-1.8.0/bin/java
 /usr/bin/java
 "
 for candidate in $candidates

@@ -4,3 +4,5 @@ JENKINS_USER      : vagrant
 JENKINS_USER_HOME : /home/vagrant
 JENKINS_HOME      : '{{JENKINS_USER_HOME}}/jenkins'
 JENKINS_EXEC_HOME : '{{JENKINS_HOME}}/data'
+JENKINS_CONFIG    : '{{JENKINS_HOME}}/conf/jenkins'
+JENKINS_PID_FILE  : '{{JENKINS_HOME}}/var/run/jenkins.pid'
