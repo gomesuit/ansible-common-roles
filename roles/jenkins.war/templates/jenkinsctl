@@ -31,7 +31,7 @@
 ### END INIT INFO
 
 # Check for missing binaries (stale symlinks should not happen)
-JENKINS_WAR="{{JENKINS_HOME}}/jenkins.war"
+JENKINS_WAR="{{JENKINS_HOME}}/bin/jenkins.war"
 test -r "$JENKINS_WAR" || { echo "$JENKINS_WAR not installed"; 
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 5; fi; }
