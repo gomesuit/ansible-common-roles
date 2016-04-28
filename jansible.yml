@@ -3,5 +3,5 @@
   become: yes
   roles:
     - common
-#    - jenkins.war
+    - jenkins.war
     - jansible-setting
