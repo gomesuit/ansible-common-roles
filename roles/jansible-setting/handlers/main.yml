@@ -1,0 +1,5 @@
+---
+- name: restart jenkins
+  command:
+    chdir={{JENKINS_HOME}}/bin
+    ./jenkinsctl restart
