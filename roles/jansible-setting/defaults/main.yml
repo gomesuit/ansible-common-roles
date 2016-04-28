@@ -1,4 +1,5 @@
 ---
+JENKINS_USER      : vagrant
 JENKINS_HOME      : /home/vagrant/jenkins
 JENKINS_JOBS_DIR  : '{{JENKINS_HOME}}/jobs'
 JENKINS_JOB_NAMES :
