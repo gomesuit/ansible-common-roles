@@ -1,11 +1,17 @@
 ---
+- name: setting jenkins config
+  file:
+    src=xml/*.xml
+    path={{JENKINS_HOME}}
+
 - name: mkdir jobs directory
   file:
-    path="{{JENKINS_JOBS_DIR}}/{{item}}"
+    path="{{JENKINS_JOBS_DIR}}/{{item}}/workspace"
     state=directory
     owner={{JENKINS_USER}}
     group={{JENKINS_USER}}
     mode=755
+    recurse=yes
   with_items: '{{JENKINS_JOB_NAMES}}'
 
 - name: set jobs config file
@@ -17,12 +23,3 @@
     mode=644
   with_items: '{{JENKINS_JOB_NAMES}}'
   notify: restart jenkins
-
-- name: mkdir jobs workspace
-  file:
-    path="{{JENKINS_JOBS_DIR}}/{{item}}/workspace"
-    state=directory
-    owner={{JENKINS_USER}}
-    group={{JENKINS_USER}}
-    mode=755
-  with_items: '{{JENKINS_JOB_NAMES}}'
