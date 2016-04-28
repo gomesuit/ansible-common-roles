@@ -1,8 +1,30 @@
 ---
 - name: setting jenkins config
-  file:
-    src=xml/*.xml
-    path={{JENKINS_HOME}}
+  copy:
+    src=xml/{{item}}
+    dest={{JENKINS_HOME}}
+    owner={{JENKINS_USER}}
+    group={{JENKINS_USER}}
+  with_items:
+    - config.xml
+    - github-plugin-configuration.xml
+    - hudson.maven.MavenModuleSet.xml
+    - hudson.model.UpdateCenter.xml
+    - hudson.plugins.git.GitSCM.xml
+    - hudson.plugins.git.GitTool.xml
+    - hudson.scm.CVSSCM.xml
+    - hudson.scm.SubversionSCM.xml
+    - hudson.tasks.Ant.xml
+    - hudson.tasks.Mailer.xml
+    - hudson.tasks.Maven.xml
+    - hudson.tasks.Shell.xml
+    - hudson.triggers.SCMTrigger.xml
+    - jenkins.model.ArtifactManagerConfiguration.xml
+    - jenkins.model.JenkinsLocationConfiguration.xml
+    - jenkins.mvn.GlobalMavenConfig.xml
+    - nodeMonitors.xml
+    - org.jenkinsci.plugins.ansible.AnsibleInstallation.xml
+    - org.jenkinsci.plugins.gitclient.JGitTool.xml
 
 - name: mkdir jobs directory
   file:
@@ -10,7 +32,6 @@
     state=directory
     owner={{JENKINS_USER}}
     group={{JENKINS_USER}}
-    mode=755
     recurse=yes
   with_items: '{{JENKINS_JOB_NAMES}}'
 
