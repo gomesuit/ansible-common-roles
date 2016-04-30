@@ -1,0 +1,12 @@
+---
+- name: install yum packages
+  yum: name={{item}} state=installed
+  with_items:
+    - java-1.7.0-openjdk
+    - java-1.7.0-openjdk-devel
+
+- name: Install Jenkins
+  yum: name=http://repo.rundeck.org/latest.rpm
+
+- name: Install Jenkins
+  yum: name=rundeck
