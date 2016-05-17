@@ -1,0 +1,19 @@
+---
+- name: install epel-release
+  yum: name=epel-release
+
+- name: install yum packages for rails
+  yum: name={{ item }}
+  with_items:
+    - ruby
+    - ruby-devel
+    - libxml2-devel
+    - libxslt-devel
+    - sqlite-devel
+    - gcc
+
+- name: install nokogiri
+  gem: name=nokogiri
+
+- name: install rails
+  gem: name=rails
