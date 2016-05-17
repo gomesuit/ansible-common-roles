@@ -11,6 +11,7 @@
     - libxslt-devel
     - sqlite-devel
     - gcc
+    - nodejs
 
 - name: install nokogiri
   gem: name=nokogiri
