@@ -17,3 +17,8 @@
 
 - name: install rails
   gem: name=rails
+
+- name: export path
+  lineinfile:
+    dest=$HOME/.bash_profile
+    line='export PATH=$HOME/.gem/ruby/bin:$PATH'
