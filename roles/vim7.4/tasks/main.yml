@@ -35,3 +35,9 @@
     creates=/usr/local/bin/vim
     make install
 
+- name: create link
+  file:
+    src=/usr/local/bin/vim
+    dest=/bin/vim
+    state=link
+
