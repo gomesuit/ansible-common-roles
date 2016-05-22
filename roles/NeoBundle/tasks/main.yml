@@ -1,0 +1,12 @@
+---
+- name: download install script
+  get_url:
+    url=https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh
+    dest=/tmp/install.sh
+    mode=0755
+
+- name: run install script
+  shell:
+    /tmp/install.sh
+    creates=~/.vim/bundle/neobundle.vim
+
