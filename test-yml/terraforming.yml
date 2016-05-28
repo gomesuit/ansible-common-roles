@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  sudo: yes
+  roles:
+    - common
+    - terraforming
+

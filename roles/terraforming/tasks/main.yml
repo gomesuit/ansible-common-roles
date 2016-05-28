@@ -1,0 +1,10 @@
+---
+- name: install yum packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - ruby
+    - ruby-devel
+
+- name: install terraforming
+  gem: name=terraforming
+
