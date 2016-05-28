@@ -1,0 +1,16 @@
+---
+- name: install golang
+  unarchive:
+    copy=no
+    src=https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz
+    dest=/usr/local/
+
+- name: set enviroments
+  lineinfile:
+    dest={{USER_HOME}}/.bash_profile
+    line={{item}}
+  with_items:
+    - 'export GOROOT=/usr/local/go'
+    - 'export PATH=$PATH:$GOROOT/bin'
+    - 'export GOPATH=$HOME/go'
+
