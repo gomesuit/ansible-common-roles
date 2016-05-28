@@ -5,3 +5,11 @@
     src=https://releases.hashicorp.com/terraform/0.6.16/terraform_0.6.16_linux_amd64.zip
     dest=/usr/local/bin/
 
+- name: set enviroments
+  lineinfile:
+    dest={{USER_HOME}}/.bash_profile
+    line={{item}}
+  with_items:
+    - 'export TF_VAR_access_key={{AWS_ACCESS_KEY_ID}}'
+    - 'export TF_VAR_secret_key={{AWS_SECRET_ACCESS_KEY}}'
+
