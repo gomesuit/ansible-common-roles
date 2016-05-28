@@ -5,8 +5,8 @@
     - java-1.7.0-openjdk
     - java-1.7.0-openjdk-devel
 
-- name: Install Jenkins
+- name: Install rundeck repo
   yum: name=http://repo.rundeck.org/latest.rpm
 
-- name: Install Jenkins
+- name: Install rundeck
   yum: name=rundeck
