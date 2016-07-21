@@ -22,7 +22,7 @@
 
 - name: download install src
   get_url:
-    url=http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
+    url=http://mirrors.jenkins-ci.org/war-stable/1.651.3/jenkins.war
     dest={{JENKINS_HOME}}/bin
 
 - name: setting conf file
