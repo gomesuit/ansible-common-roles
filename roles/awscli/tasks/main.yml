@@ -1,0 +1,16 @@
+---
+- name: get install pip script
+  get_url:
+    url=https://bootstrap.pypa.io/get-pip.py
+    dest=/tmp/
+    mode=0755
+
+- name: python get-pip.py
+  shell:
+    python /tmp/get-pip.py
+    creates=/bin/pip
+
+- name: pip install awscli
+  pip:
+    name=awscli
+
