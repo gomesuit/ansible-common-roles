@@ -4,3 +4,9 @@
     src=audit.sh
     dest=/etc/profile.d/
 
+- name: set mode
+  file:
+    path=/var/log/script
+    state=directory
+    mode=755
+
