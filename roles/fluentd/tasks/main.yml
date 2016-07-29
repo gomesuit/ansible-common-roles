@@ -40,7 +40,7 @@
     src=out-{{item}}.conf
     dest=/etc/td-agent/conf.d/
   with_items:
-    - s3
+    - file
 
 #- name: set group
 #  user:
