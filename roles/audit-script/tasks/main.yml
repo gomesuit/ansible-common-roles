@@ -1,0 +1,6 @@
+---
+- name: set audit script
+  copy:
+    src=audit.sh
+    dest=/etc/profile.d/
+
