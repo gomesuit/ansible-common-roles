@@ -1,0 +1,50 @@
+---
+- name: download install script
+  get_url:
+    url=https://toolbelt.treasuredata.com/sh/install-redhat-td-agent2.sh
+    dest=/tmp/install-redhat-td-agent2.sh
+    mode=0755
+
+- name: install fluentd
+  shell:
+    /tmp/install-redhat-td-agent2.sh
+    creates=/sbin/td-agent
+
+- name: install plugin
+  gem:
+    executable=/sbin/td-agent-gem
+    name={{ item }}
+  with_items:
+    - fluent-plugin-forest
+
+- name: mkdir conf.d
+  file:
+    path=/etc/td-agent/conf.d
+    state=directory
+    recurse=yes
+
+- name: set config file
+  copy:
+    src=td-agent.conf
+    dest=/etc/td-agent/td-agent.conf
+
+- name: set in config file
+  copy:
+    src=in-{{item}}.conf
+    dest=/etc/td-agent/conf.d/
+  with_items:
+    - nginx
+
+- name: set out config file
+  copy:
+    src=out-{{item}}.conf
+    dest=/etc/td-agent/conf.d/
+  with_items:
+    - s3
+
+#- name: set group
+#  user:
+#    name=td-agent
+#    groups=root
+#    append=yes
+
