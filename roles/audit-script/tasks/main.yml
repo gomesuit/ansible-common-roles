@@ -8,5 +8,5 @@
   file:
     path=/var/log/script
     state=directory
-    mode=755
+    mode=777
 
