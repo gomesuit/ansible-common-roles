@@ -16,6 +16,7 @@
     name={{ item }}
   with_items:
     - fluent-plugin-forest
+    - fluent-plugin-file-alternative
 
 - name: mkdir conf.d
   file:
