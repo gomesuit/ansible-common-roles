@@ -1,0 +1,28 @@
+---
+- name: git clone rbenb
+  git:
+    repo=https://github.com/rbenv/rbenv.git
+    dest=/root/.rbenv
+
+- name: configure
+  shell:
+    chdir=/root/.rbenv
+    src/configure
+    creates=/root/.rbenv/src/Makefile
+
+- name: make
+  shell:
+    chdir=/root/.rbenv
+    make -C src
+    creates=/root/.rbenv/src/realpath.o
+
+- name: set enviroment
+  lineinfile:
+    dest=/root/.bash_profile
+    line='export PATH="$HOME/.rbenv/bin:$PATH"'
+
+- name: git clone ruby-build
+  git:
+    repo=git://github.com/sstephenson/ruby-build.git
+    dest=/root/.rbenv/plugins/ruby-build
+
