@@ -1,0 +1,16 @@
+
+<source>
+  type tail
+  path /var/log/script/*.log
+  tag audit.*
+  #format /^(?<message>.*)$/
+  format none
+  pos_file /var/log/td-agent/audit.pos
+  refresh_interval 30
+</source>
+
+#<match audit.**>
+#  @type rewrite_tag_filter
+#  remove_tag_prefix audit.var.log.scritp
+#</match>
+
