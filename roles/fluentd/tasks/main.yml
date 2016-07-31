@@ -10,6 +10,11 @@
     /tmp/install-redhat-td-agent2.sh
     creates=/sbin/td-agent
 
+- name: service enable
+  service:
+    name=td-agent
+    enabled=yes
+
 - name: install plugin
   gem:
     executable=/sbin/td-agent-gem
@@ -37,6 +42,9 @@
     - nginx
     - audit
     - messages
+    - cron
+    - maillog
+    - secure
 
 - name: set out config file
   copy:
