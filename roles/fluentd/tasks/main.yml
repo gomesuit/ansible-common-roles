@@ -36,6 +36,7 @@
   with_items:
     - nginx
     - audit
+    - messages
 
 - name: set out config file
   copy:
@@ -44,9 +45,15 @@
   with_items:
     - file
 
-#- name: set group
-#  user:
-#    name=td-agent
-#    groups=root
-#    append=yes
+- name: change run user
+  replace:
+    dest=/etc/init.d/td-agent
+    regexp='^TD_AGENT_USER=.*'
+    replace='TD_AGENT_USER=root'
+
+- name: change run group
+  replace:
+    dest=/etc/init.d/td-agent
+    regexp='^TD_AGENT_GROUP=.*'
+    replace='TD_AGENT_GROUP=root'
 
