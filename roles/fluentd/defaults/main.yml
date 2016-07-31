@@ -1,0 +1,10 @@
+IN_FLUENTD:
+  - nginx
+  - audit
+  - messages
+  - cron
+  - maillog
+  - secure
+OUT_FLUENTD:
+  - file
+

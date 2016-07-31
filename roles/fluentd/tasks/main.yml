@@ -38,20 +38,13 @@
   copy:
     src=in-{{item}}.conf
     dest=/etc/td-agent/conf.d/
-  with_items:
-    - nginx
-    - audit
-    - messages
-    - cron
-    - maillog
-    - secure
+  with_items: '{{IN_FLUENTD}}'
 
 - name: set out config file
   copy:
     src=out-{{item}}.conf
     dest=/etc/td-agent/conf.d/
-  with_items:
-    - file
+  with_items: '{{OUT_FLUENTD}}'
 
 - name: change run user
   replace:
