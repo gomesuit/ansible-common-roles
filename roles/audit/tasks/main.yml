@@ -1,0 +1,25 @@
+---
+- name: install audit
+  yum:
+    name=audit
+
+- name: enable service
+  service:
+    name=auditd
+    enabled=yes
+
+- name: start audit
+  service:
+    name=auditd
+    state=started
+
+- name: set rules file
+  copy:
+    src=/usr/share/doc/audit-2.4.1/stig.rules
+    dest=/etc/audit/rules.d/stig.rules
+    remote_src=true
+
+- name: set audit rule
+  shell:
+    auditctl -R /etc/audit/rules.d/stig.rules
+
