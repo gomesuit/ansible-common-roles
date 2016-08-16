@@ -1,0 +1,11 @@
+
+- name: install aide
+  yum:
+    name=aide
+
+- name: set scan script
+  copy:
+    src=aide_scan.sh
+    dest=/etc/cron.hourly/
+    mode=700
+
