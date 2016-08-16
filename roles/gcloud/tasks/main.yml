@@ -1,0 +1,17 @@
+---
+- name: download install script
+  get_url:
+    url=https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-121.0.0-linux-x86_64.tar.gz
+    dest=/tmp/
+
+- name: unarchive src file
+  unarchive:
+    src=/tmp/google-cloud-sdk-121.0.0-linux-x86_64.tar.gz
+    dest=/usr/local/
+    copy=no
+
+- name: run install script
+  shell:
+    /usr/local/google-cloud-sdk/install.sh -q
+    creates=/usr/local/google-cloud-sdk/bin/gcloud
+
