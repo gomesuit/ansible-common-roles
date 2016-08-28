@@ -1,0 +1,30 @@
+---
+- name: install require package
+  yum: name={{item}}
+  with_items:
+    - java-1.8.0-openjdk
+    - java-1.8.0-openjdk-devel
+
+- name: get yum repo
+  get_url:
+    url=http://pkg.jenkins.io/redhat-stable/jenkins.repo
+    dest=/etc/yum.repos.d/jenkins.repo
+    mode=0644
+
+- name: rpm key
+  rpm_key:
+    key=http://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+- name: install jenkins
+  yum: name=jenkins
+
+- name: enable service
+  service:
+    name=jenkins
+    enabled=yes
+
+- name: start jenkins
+  service:
+    name=jenkins
+    state=started
+
