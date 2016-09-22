@@ -7,10 +7,10 @@
 - name: run install script
   shell:
     perl /tmp/nodebrew setup
-    creates=/root/.nodebrew
+    creates={{ansible_user_dir}}.nodebrew
 
 - name: set enviroment
   lineinfile:
-    dest=/root/.bash_profile
+    dest={{ansible_user_dir}}/.bash_profile
     line='export PATH=$HOME/.nodebrew/current/bin:$PATH'
 
