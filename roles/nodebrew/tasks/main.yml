@@ -1,0 +1,16 @@
+---
+- name: download install script
+  get_url:
+    url=https://git.io/nodebrew
+    dest=/tmp/nodebrew
+
+- name: run install script
+  shell:
+    perl nodebrew setup
+    creates=/root/.nodebrew
+
+- name: set enviroment
+  lineinfile:
+    dest=/root/.bash_profile
+    line='export PATH=$HOME/.nodebrew/current/bin:$PATH'
+
