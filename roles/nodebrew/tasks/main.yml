@@ -6,7 +6,7 @@
 
 - name: run install script
   shell:
-    perl nodebrew setup
+    perl /tmp/nodebrew setup
     creates=/root/.nodebrew
 
 - name: set enviroment
