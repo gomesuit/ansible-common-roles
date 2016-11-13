@@ -1,0 +1,13 @@
+---
+- name: download binary
+  get_url:
+    url=http://github.com/docker/compose/releases/download/{{DOCKER_COMPOSE_VERSION}}/docker-compose-Linux-x86_64
+    dest=/usr/local/bin/docker-compose.{{DOCKER_COMPOSE_VERSION}}
+    mode=0755
+
+- name: create link
+  file:
+    src=/usr/local/bin/docker-compose.{{DOCKER_COMPOSE_VERSION}}
+    dest=/usr/bin/docker-compose
+    state=link
+

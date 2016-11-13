@@ -1,6 +1,22 @@
 ---
-- name: be sure libdevmapper is installed
-  yum: name=libdevmapper.so.1.02 state=installed
-  
-- name: be sure docker is installed
-  yum: name=docker-io state=installed
+- name: download install script
+  get_url:
+    url=https://get.docker.com/
+    dest=/tmp/get.docker.com.sh
+    mode=0755
+
+- name: run install script
+  command:
+    /tmp/get.docker.com.sh
+    creates=/usr/bin/docker
+
+- name: enable service
+  service:
+    name=docker
+    enabled=yes
+
+- name: start service
+  service:
+    name=docker
+    state=started
+
