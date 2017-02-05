@@ -1,0 +1,9 @@
+---
+- name: install epel
+  yum:
+    name=epel-release
+
+- name: install s3cmd
+  yum:
+    name=s3cmd
+
