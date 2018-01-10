@@ -5,12 +5,13 @@
     dest=/tmp/
     mode=0755
 
-- name: python get-pip.py
+- name: run install script
   shell:
     python /tmp/get-pip.py
-    creates=/bin/pip
+    creates=/usr/bin/aws
 
-- name: pip install awscli
+- name: install aws cli
   pip:
     name=awscli
-
+    executable=/usr/bin/pip
+    state=latest
