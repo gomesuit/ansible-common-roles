@@ -1,6 +1,0 @@
----
-- hosts: cassandra
-  sudo: yes
-  roles:
-    - python2.7
-    - cassandra2.2

@@ -1,4 +1,0 @@
----
-cassandra_home: /usr/local/cassandra
-cassandra_host: 192.168.33.13
-cassandra_seed: 192.168.33.12,192.168.33.13

@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  become: yes
-  become_user: root
-  roles:
-    - terraform0.6.16
-

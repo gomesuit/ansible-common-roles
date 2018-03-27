@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  become: yes
-  roles:
-    - common
-    - jenkins.war
-    - jansible-setting
