@@ -1,0 +1,26 @@
+---
+- name: Restart server
+  shell: sleep 2 && shutdown -r now
+  async: 1
+  poll: 0
+  ignore_errors: true
+
+#- name: wait for SSH port down
+#  become: false
+#  local_action: wait_for
+#  args:
+#    host: "{{ inventory_hostname }}"
+#    port: "{{ ansible_port }}"
+#    state: stopped
+#    delay: 30
+#    timeout: 180
+
+- name: wait for SSH port up
+  become: false
+  local_action: wait_for
+  args:
+    host: "{{ ansible_ssh_host }}"
+    port: "{{ ansible_port }}"
+    state: started
+    delay: 30
+    timeout: 180

@@ -1,0 +1,8 @@
+---
+- name: disable selinux
+  selinux:
+    state: disabled
+  notify: reboot
+
+- name: handler to run at this point
+  meta: flush_handlers
