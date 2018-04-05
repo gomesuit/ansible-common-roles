@@ -43,3 +43,8 @@
   service:
     name=kubelet
     enabled=yes
+
+- name: start service
+  service:
+    name=kubelet
+    state=started
