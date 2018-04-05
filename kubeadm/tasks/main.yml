@@ -1,0 +1,45 @@
+---
+- name: install docker
+  yum: name=docker
+
+- name: enable service
+  service:
+    name=docker
+    enabled=yes
+
+- name: start service
+  service:
+    name=docker
+    state=started
+
+- name: set repo
+  copy:
+    src: kubernetes.repo
+    dest: /etc/yum.repos.d/kubernetes.repo
+
+- name: set k8s
+  copy:
+    src: k8s.conf
+    dest: /etc/sysctl.d/k8s.conf
+
+- name: set bridge
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: 1
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: install kubeadm
+  yum:
+    name: "{{ item }}"
+    enablerepo: kubernetes
+  with_items:
+    - kubelet
+    - kubeadm
+    - kubectl
+
+- name: enable service
+  service:
+    name=kubelet
+    enabled=yes
