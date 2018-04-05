@@ -24,3 +24,7 @@
     state: started
     delay: 30
     timeout: 180
+
+- name: wait started sshd
+  shell: sleep 10
+  changed_when: False
