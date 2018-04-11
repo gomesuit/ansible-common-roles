@@ -46,7 +46,7 @@
 - name: service file
   copy:
     src=kubelet.service
-    dest=/usr/lib/systemd/system/kubelet.service
+    dest=/etc/systemd/system/kubelet.service
     mode=0644
   notify: systemctl daemon-reload
 
