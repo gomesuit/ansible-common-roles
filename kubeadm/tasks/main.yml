@@ -39,6 +39,10 @@
     - kubeadm
     - kubectl
 
+- name: swapoff
+  shell: swapoff -a
+  changed_when: False
+
 - name: enable service
   service:
     name=kubelet
