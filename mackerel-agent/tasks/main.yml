@@ -1,0 +1,65 @@
+---
+- name: download install script
+  get_url:
+    url=https://mackerel.io/file/script/setup-yum-v2.sh
+    dest=/tmp/setup-yum.sh
+    mode=0755
+
+- name: run install script
+  shell:
+    /tmp/setup-yum.sh
+    creates=/usr/local/bin/mackerel-agent
+
+- name: install mackerel agent
+  yum:
+    name=mackerel-agent
+
+- name: install plugin
+  yum:
+    name={{item}}
+  with_items:
+    - mackerel-check-plugins
+    - mackerel-agent-plugins
+
+- name: set AUTO_RETIREMENT
+  lineinfile:
+    dest=/etc/sysconfig/mackerel-agent
+    line='AUTO_RETIREMENT={{MACKEREL_AUTO_RETIREMENT}}'
+  notify: restart mackerel-agent
+
+- name: mkdir conf.d
+  file:
+    path=/etc/mackerel-agent/conf.d
+    state=directory
+    recurse=yes
+
+- name: set main config
+  template:
+    src=mackerel-agent.conf
+    dest=/etc/mackerel-agent/
+  notify: restart mackerel-agent
+
+- name: set common config
+  copy:
+    src={{item}}.conf
+    dest=/etc/mackerel-agent/conf.d/
+  with_items: '{{MACKEREL_COMMON_CONF}}'
+  notify: restart mackerel-agent
+
+- name: set external config
+  copy:
+    src={{item}}.conf
+    dest=/etc/mackerel-agent/conf.d/
+  with_items: '{{MACKEREL_EXTERNAL_CONF}}'
+  notify: restart mackerel-agent
+  when: "{{MACKEREL_EXTERNAL_USE}} == true"
+
+- name: service enable
+  service:
+    name=mackerel-agent
+    enabled=yes
+
+- name: service start
+  service:
+    name=mackerel-agent
+    state=started
